@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "word-impostor"
+version = "0.1.0"
+description = "Look at 4 photos or 4 words and find the one that doesn't belong in the group."
+authors = ["Bryan Jones <unix.chkpwd@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "^0.29.0"
+fastapi = "^0.110.0"
+nicegui = "1.4.19"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
