@@ -8,10 +8,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-uvicorn = "^0.29.0"
-fastapi = "^0.110.0"
-nicegui = "1.4.19"
+requests = "*"
+flask = "^3.0.2"
 
+[tool.poetry.scripts]
+render = 'word_impostor.main:main'
 
 [build-system]
 requires = ["poetry-core"]
