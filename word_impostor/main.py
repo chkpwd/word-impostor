@@ -1,6 +1,6 @@
 import os
 import logging
-from flask import Flask
+from flask import Flask, render_template
 from api import ImageDataResponse, WordDataResponse
 from blueprints import rooms
 from flask_socketio import SocketIO
@@ -12,8 +12,7 @@ logging.basicConfig(
     level=logging.getLevelName(os.environ.get("LOG_LEVEL", "INFO").upper()),
 )
 
-
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = "batman"
 app.register_blueprint(rooms.blueprint)
 socketio = SocketIO(app)
@@ -21,8 +20,8 @@ rooms.register(socketio)
 
 
 @app.route("/")
-def hello():
-    return "Hello, World!"
+def home():
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

@@ -1,12 +1,53 @@
 <!DOCTYPE html>
-<script
-  src="https://unpkg.com/htmx.org@1.9.11"
-  integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
-  crossorigin="anonymous"
-></script>
 <html>
+  <head>
+    <title>Word Impostor Game</title>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.11"
+      integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+      .button {
+        margin: 10px;
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+      }
+      .button:hover {background-color: #3e8e41}
+      .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
   <body>
-    <h1>My First Heading</h1>
-    <p>My first paragraph.</p>
+    <h1>Word Impostor</h1>
+    <button class="button" onclick="createRoom()">Create Room</button>
+    <button class="button" onclick="joinRoom()">Join Room</button>
+    <script>
+      function createRoom() {
+        // Add your logic here
+      }
+      function joinRoom() {
+        // Add your logic here
+      }
+    </script>
   </body>
 </html>
