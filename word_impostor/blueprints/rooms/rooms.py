@@ -42,7 +42,7 @@ def room(name):
 
 def register(socketio):
     @socketio.on("join_room")
-    def handle_my_custom_event(json):
+    def join_room(json):
         print("join_room: " + str(json))
 
     @socketio.on("send_message")

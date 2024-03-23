@@ -9,11 +9,31 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8">
-        const room_name = "{{ room_name }}";
-        const socket = io();
-        socket.on('connect', function() {
-            socket.emit('join_room', {data: room_name});
+      const room_name = "{{ room_name }}";
+      const socket = io();
+      socket.on('connect', function() {
+        socket.emit('join_room', {
+          room: room_name,
+          player: socket.id
         });
+      });
     </script>
   </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to the Room: {{ room_name }}</h1>
+      <div id="player-list">
+        <h2>Players:
+          <p>
+            {{ player_name }}
+          </p>
+        </h2>
+      </div>
+      <div id="game-status">
+        <h2>Game Status:</h2>
+        <!-- Game status will be dynamically populated here -->
+      </div>
+      <button id="start-game">Start Game</button>
+    </div>
+  </body>
 </html>
