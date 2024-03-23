@@ -37,15 +37,15 @@ def create_room():
 
 @blueprint.route("/play/<name>")
 def room(name):
-    return "Room: " + name
+    return render_template("play.html", room_name=name)
 
 
 def register(socketio):
     @socketio.on("join_room")
     def handle_my_custom_event(json):
-        print("received json: " + str(json))
+        print("join_room: " + str(json))
 
     @socketio.on("send_message")
     def communication(json):
-        print("received json: " + str(json))
+        print("sent_message: " + str(json))
         socketio.emit("message", json)
