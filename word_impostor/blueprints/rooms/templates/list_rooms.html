@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<script
+  src="https://unpkg.com/htmx.org@1.9.11"
+  integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+  crossorigin="anonymous"
+></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.11"
+      integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+      crossorigin="anonymous"
+    ></script>
+    <title>Rooms</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+      }
+      a {
+        text-decoration: none;
+        color: #007BFF;
+      }
+      a:hover {
+        color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rooms</h1>
+    <ul>
+      {% for room in rooms %}
+        <li>
+          <a href="{{ url_for('rooms.room', name=room) }}">{{ room }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

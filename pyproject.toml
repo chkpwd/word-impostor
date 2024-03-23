@@ -10,9 +10,7 @@ readme = "README.md"
 python = "^3.11"
 requests = "*"
 flask = "^3.0.2"
-
-[tool.poetry.scripts]
-render = 'word_impostor.main:main'
+flask-socketio = "^5.3.6"
 
 [build-system]
 requires = ["poetry-core"]
