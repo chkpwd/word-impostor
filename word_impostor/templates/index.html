@@ -7,46 +7,62 @@
     integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
     crossorigin="anonymous"></script>
   <style>
+    :root {
+      --primary-color: #1a202c;
+      --secondary-color: #2d3748;
+      --hover-color: #4a5568;
+      --text-color: #f7fafc;
+      --border-color: #a0aec0;
+    }
+
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
+      background-color: var(--secondary-color);
+      font-family: 'Roboto', sans-serif;
+      color: var(--text-color);
     }
 
     .button {
       margin: 10px;
-      padding: 15px 25px;
-      font-size: 24px;
+      padding: 10px 20px;
+      font-size: 15px;
       text-align: center;
       cursor: pointer;
       outline: none;
-      color: #fff;
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 9px #999;
+      color: var(--text-color);
+      background-color: var(--primary-color);
+      border: 2px solid var(--border-color);
+      border-radius: 25px;
+      box-shadow: 0 5px var(--border-color);
+      transition: all 0.3s ease;
     }
 
     .button:hover {
-      background-color: #3e8e41
+      background-color: var(--hover-color);
+      border-color: var(--border-color);
     }
 
     .button:active {
-      background-color: #3e8e41;
-      box-shadow: 0 5px #666;
+      background-color: var(--primary-color);
+      box-shadow: 0 5px var(--border-color);
       transform: translateY(4px);
     }
   </style>
 </head>
 
 <body>
-  <div>
-    <h1>Word Impostor</h1>
-  </div>
-  <div>
+  <header class="flex items-center justify-center w-full py-4 md:py-8">
+    <div class="space-y-2 text-center">
+      <h1 class="text-3xl font-bold tracking-tighter sm:text-4xl">Word Impostor</h1>
+      <p class="text-xl">A multiplayer word game of deduction</p>
+    </div>
+  </header>
+  <div class="flex flex-col items-center justify-center min-h-screen text-center">
+    <p class="mb-4 text-lg">Can you find the impostor? Play with your friends!</p>
     <button class="button" onclick="createRoom()">Create Room</button>
     <button class="button" onclick="joinRoom()">Join Room</button>
   </div>
