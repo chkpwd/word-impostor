@@ -1,5 +1,5 @@
-import uuid
-from flask import Blueprint, render_template, request
+from coolname import generate_slug
+from flask import Blueprint, render_template, request, redirect, url_for
 
 rooms = set()
 
@@ -11,11 +11,16 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route("/create", methods=["POST"])
-def create_room():
+@blueprint.route("/create", methods=["GET", "POST"])
+def generate_room():
     error = request.args.get("error", "")
 
-    return render_template("create_room.html", error=error)
+    if request.method == "POST":
+        room_name = str(generate_slug(3))
+
+        rooms.add(room_name)
+        return redirect(url_for("rooms.room", name=room_name))
+    return render_template("generate_room.html", error=error)
 
 
 @blueprint.route("/play/<name>")

@@ -11,6 +11,7 @@ python = "^3.11"
 requests = "*"
 flask = "^3.0.2"
 flask-socketio = "^5.3.6"
+coolname = "^2.2.0"
 
 [build-system]
 requires = ["poetry-core"]
