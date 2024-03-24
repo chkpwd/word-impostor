@@ -28,9 +28,9 @@ def create_room():
                 "rooms.create_room",
                 error="Room already exists")
             )
-        else:
-            rooms.add(room_name)
-            return redirect(url_for("rooms.room", name=room_name))
+
+        rooms.add(room_name)
+        return redirect(url_for("rooms.room", name=room_name))
 
     return render_template("create_room.html", error=error)
 
@@ -44,6 +44,11 @@ def register(socketio):
     @socketio.on("join_room")
     def join_room(json):
         print("join_room: " + str(json))
+
+    @socketio.on("user_join")
+    def handle_user_join(username):
+        print(f"User {username} joined!")
+        users[username] = request.sid
 
     @socketio.on("send_message")
     def communication(json):
