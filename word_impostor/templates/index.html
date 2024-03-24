@@ -51,8 +51,12 @@
     <button class="button" onclick="joinRoom()">Join Room</button>
   </div>
   <script>
-    function createRoom() {}
-    function joinRoom() {}
+    function createRoom() {
+      window.location.href = "{{ url_for('rooms.create_room') }}";
+    }
+    function joinRoom() {
+      window.location.href = "{{ url_for('rooms.list_rooms') }}";
+    }
   </script>
 </body>
 
