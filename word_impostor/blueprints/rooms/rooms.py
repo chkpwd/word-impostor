@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+import uuid
+from flask import Blueprint, render_template, request
 
 rooms = set()
 
@@ -10,27 +11,9 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route("/list")
-def list_rooms():
-    return render_template("list_rooms.html", rooms=rooms)
-
-
-@blueprint.route("/create", methods=["GET", "POST"])
+@blueprint.route("/create", methods=["POST"])
 def create_room():
     error = request.args.get("error", "")
-
-    if request.method == "POST":
-        room_name = request.form["room_name"]
-
-        if room_name in rooms:
-            # Redirect based on the flask blueprint and function name
-            return redirect(url_for(
-                "rooms.create_room",
-                error="Room already exists")
-            )
-
-        rooms.add(room_name)
-        return redirect(url_for("rooms.room", name=room_name))
 
     return render_template("create_room.html", error=error)
 

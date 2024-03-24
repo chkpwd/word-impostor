@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Create Room</title>
-    <script
-      src="https://unpkg.com/htmx.org@1.9.11"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://unpkg.com/htmx.org@1.9.11"
       integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
   </head>
   <body>
-    <form action="{{ url_for('rooms.create_room') }}" method="post">
-      <label for="room">Room:</label><br>
-      <input type="text" id="room" name="room_name"><br>
-      <input type="submit" value="Submit">
-    </form>
-    {% if error %}
-      <h1>{{ error }}</h1>
-    {% endif %}
+    <div class="container">
+      <form action="{{ url_for('rooms.create_room') }}" method="post" role="form">
+        <div class="form-group">
+          <label for="room">Room:</label>
+          <input type="text" class="form-control" id="room" name="room_name" aria-describedby="roomHelp">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {% if error %}
+        <div class="alert alert-danger" role="alert">
+          {{ error }}
+        </div>
+      {% endif %}
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   </body>
 </html>

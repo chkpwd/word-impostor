@@ -26,6 +26,13 @@
       color: var(--text-color);
     }
 
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
     .button {
       margin: 10px;
       padding: 10px 20px;
@@ -62,16 +69,13 @@
     </div>
   </header>
   <div class="flex flex-col items-center justify-center min-h-screen text-center">
-    <p class="mb-4 text-lg">Can you find the impostor? Play with your friends!</p>
-    <button class="button" onclick="createRoom()">Create Room</button>
-    <button class="button" onclick="joinRoom()">Join Room</button>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <button class="button" onclick="createRoom()">Create Room</button>
+    </div>
   </div>
   <script>
     function createRoom() {
       window.location.href = "{{ url_for('rooms.create_room') }}";
-    }
-    function joinRoom() {
-      window.location.href = "{{ url_for('rooms.list_rooms') }}";
     }
   </script>
 </body>
