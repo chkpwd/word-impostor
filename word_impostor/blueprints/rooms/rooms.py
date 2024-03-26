@@ -8,7 +8,8 @@ from flask import (
     request,
     redirect,
     url_for,
-    session
+    session,
+    jsonify
 )
 
 
@@ -57,6 +58,13 @@ def set_username():
 
         if not player_names[identifier]:
             del player_names[identifier]
+
+            if request.headers.get("Accept") == "application/json":
+                return jsonify({
+                    "room_name": room_name,
+                    "player_id": identifier
+                })
+
             return redirect(url_for(
                 "rooms.set_username",
                 room_name=room_name,

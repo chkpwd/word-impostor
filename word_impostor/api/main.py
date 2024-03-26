@@ -3,6 +3,7 @@ import requests
 
 logger = logging.getLogger(__name__)
 
+
 class ImageDataResponse:
     """Get the image data."""
 
@@ -16,6 +17,7 @@ class ImageDataResponse:
 
         image = requests.get(self.URL, timeout=10)
         return image
+
 
 class WordDataResponse:
     """Get the word from API."""
