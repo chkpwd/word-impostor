@@ -26,4 +26,3 @@ class CreateRoom(Resource):
         rooms[room_name] = Room(room_name)
 
         return {"room_name": room_name}, 200
-
