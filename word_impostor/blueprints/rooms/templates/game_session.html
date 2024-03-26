@@ -11,11 +11,16 @@
     <script type="text/javascript" charset="utf-8">
       const room_name = "{{ room_name }}";
       const socket = io();
+
       socket.on('connect', function() {
-        socket.emit('join_room', {
-          room: room_name,
-          player: socket.id
+        socket.emit('join_game', {
+          room_name: room_name,
+          player_id: "{{ player_id }}"
         });
+      });
+
+      socket.on('player_list', function (data) {
+        console.log(data);
       });
     </script>
   </head>
@@ -24,9 +29,7 @@
       <h1>Welcome to the Room: {{ room_name }}</h1>
       <div id="player-list">
         <h2>Players:
-          <p>
-            {{ player_name }}
-          </p>
+          <!-- placeholder -->
         </h2>
       </div>
       <button id="start-game">Start Game</button>
