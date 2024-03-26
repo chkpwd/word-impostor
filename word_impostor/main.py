@@ -1,8 +1,8 @@
 import os
 import logging
-from flask import Flask, render_template
-from api import ImageDataResponse, WordDataResponse
-from blueprints import rooms
+import api
+from flask import Flask
+from flask_restful import Api
 from flask_socketio import SocketIO
 
 logger = logging.getLogger(__name__)
@@ -12,16 +12,15 @@ logging.basicConfig(
     level=logging.getLevelName(os.environ.get("LOG_LEVEL", "INFO").upper()),
 )
 
+
 app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = "batman"
-app.register_blueprint(rooms.blueprint)
 socketio = SocketIO(app)
-rooms.register(socketio)
+flask_api = Api(app)
+api.register(socketio)
 
-
-@app.route("/")
-def home():
-    return render_template("index.html")
+flask_api.add_resource(api.CreateUser, '/api/user/<string:username>')
+flask_api.add_resource(api.CreateRoom, '/api/room')
 
 
 if __name__ == "__main__":
@@ -46,7 +45,7 @@ if __name__ == "__main__":
     else:
         logger.info("Port is set to '%s'", listen_port)
 
-    word_data = WordDataResponse(word_language)
-    image_data = ImageDataResponse()
+    # word_data = WordDataResponse(word_language)
+    # image_data = ImageDataResponse()
 
     socketio.run(app, host="0.0.0.0", port=5000)
