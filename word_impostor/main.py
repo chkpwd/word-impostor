@@ -19,7 +19,6 @@ socketio = SocketIO(app)
 flask_api = Api(app)
 api.register(socketio)
 
-flask_api.add_resource(api.CreateUser, '/api/user/<string:username>')
 flask_api.add_resource(api.CreateRoom, '/api/room')
 
 
