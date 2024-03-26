@@ -1,1 +1,2 @@
-from .rooms import CreateUser, CreateRoom, register
+from .rooms import CreateRoom
+from .websocket import register
