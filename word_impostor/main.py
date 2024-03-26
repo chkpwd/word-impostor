@@ -15,7 +15,8 @@ logging.basicConfig(
 
 app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = "batman"
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
+
 flask_api = Api(app)
 api.register(socketio)
 
