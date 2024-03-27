@@ -1,27 +1,45 @@
 import json
-from flask_socketio import SocketIO, join_room
+import flask_socketio
 from flask import request
 from .rooms import rooms
 
+def error(socketio: flask_socketio.SocketIO, message: str):
+    socketio.emit('error', message, to=request.sid)
 
-def register(socketio: SocketIO):
-    @socketio.on("join_game")
-    def join_game(data):
+def register(socketio: flask_socketio.SocketIO):
+    @socketio.on("join_room")
+    def join_room(data):
+        if type(data) is not dict:
+            # socketio.emit('error', 'Pls Data')
+            error(socketio, 'Pls Data ' + str(data))
+            return
+
+        if data.get("room_name") not in rooms:
+            # socketio.emit('error', 'Room not found')
+            print("Room name")
+            error(socketio, 'Room not found')
+            return
+
+        if data.get("username") is None:
+            # socketio.emit('error', 'Username not found')
+            error(socketio, 'Username not found')
+            return
+
         room_name = data.get("room_name")
         username = data.get("username")
 
         room = rooms.get(room_name)
-
-        if not username or not room_name or not room:
-            socketio.emit('error', 'validation')
-            return
-
         room.add_player(request.sid, username)
 
-        join_room(room_name)
+        flask_socketio.join_room(room_name)
         socketio.emit(
             'player_list',
             json.dumps(room.list_players()),
+            to=room_name
+        )
+        socketio.emit(
+            'player_joined',
+            json.dumps(room.get_player(request.sid)),
             to=room_name
         )
 
@@ -33,6 +51,11 @@ def register(socketio: SocketIO):
                 socketio.emit(
                     'player_list',
                     json.dumps(room.list_players()),
+                    to=room.name
+                )
+                socketio.emit(
+                    'player_leave',
+                    json.dumps(room.get_player(request.sid)),
                     to=room.name
                 )
 
