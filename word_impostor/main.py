@@ -46,7 +46,6 @@ if __name__ == "__main__":
         logger.info("Port is set to '%s'", listen_port)
 
     word_data = api.WordDataResponse(word_language)
-
     image_data = api.ImageDataResponse()
 
     socketio.run(app, host="0.0.0.0", port=5000, debug=True)
