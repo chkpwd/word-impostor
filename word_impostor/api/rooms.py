@@ -3,6 +3,7 @@ from flask_restful import Resource
 
 rooms: dict[str, "Room"] = {}  # instantiate first before class is available
 
+
 class Room:
     def __init__(self, room_name: str):
         self.name = room_name
@@ -19,6 +20,7 @@ class Room:
 
     def list_players(self):
         return list(self.players.values())
+
 
 class CreateRoom(Resource):
     def post(self):
