@@ -15,9 +15,14 @@ logging.basicConfig(
 
 app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = "batman"
-socketio = SocketIO(app, cors_allowed_origins="*")
-# cors = CORS(app, resources={r"/api/*": {"origins": "localhost:5173"}})
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+if os.environ.get("ENABLE_CORS") is not None:
+    socketio = SocketIO(app, cors_allowed_origins="*")
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+else:
+    socketio = SocketIO(app)
+    cors = CORS(app)
+
 flask_api = Api(app)
 api.register(socketio)
 
@@ -44,6 +49,11 @@ if __name__ == "__main__":
         logger.info("Port is not set. Defaulting to 5000.")
     else:
         logger.info("Port is set to '%s'", listen_port)
+
+    if os.environ.get("ENABLE_CORS") is None:
+        logger.info("CORS is not set. Defaulting to '*'.")
+    else:
+        logger.info("CORS is set to '%s'", os.environ.get("CORS"))
 
     word_data = api.WordDataResponse(word_language)
     image_data = api.ImageDataResponse()
