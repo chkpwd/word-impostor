@@ -4,6 +4,7 @@ import api
 from flask import Flask
 from flask_restful import Api
 from flask_socketio import SocketIO
+from flask_cors import CORS
 
 logger = logging.getLogger(__name__)
 
@@ -12,15 +13,15 @@ logging.basicConfig(
     level=logging.getLevelName(os.environ.get("LOG_LEVEL", "INFO").upper()),
 )
 
-
 app = Flask(__name__, template_folder='templates')
 app.config["SECRET_KEY"] = "batman"
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
+# cors = CORS(app, resources={r"/api/*": {"origins": "localhost:5173"}})
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 flask_api = Api(app)
 api.register(socketio)
 
 flask_api.add_resource(api.CreateRoom, '/api/room')
-
 
 if __name__ == "__main__":
     logger.info("Starting Game...")
@@ -45,6 +46,7 @@ if __name__ == "__main__":
         logger.info("Port is set to '%s'", listen_port)
 
     # word_data = WordDataResponse(word_language)
+
     # image_data = ImageDataResponse()
 
-    socketio.run(app, host="0.0.0.0", port=5000)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
